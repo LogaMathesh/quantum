@@ -1,0 +1,8 @@
+fastapi
+uvicorn
+numpy
+scikit-learn
+joblib
+qiskit
+qiskit-machine-learning
+qiskit-algorithms

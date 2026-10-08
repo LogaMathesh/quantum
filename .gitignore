@@ -1,0 +1,13 @@
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
+# Python environment artifacts
+pyvenv.cfg
+.Python
+pip-selfcheck.json
+
+# If you use pyenv
+.python-version
