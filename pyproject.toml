@@ -1,0 +1,14 @@
+[project]
+name = "quantum-crop-yield"
+version = "1.0.0"
+requires-python = ">=3.12,<3.13"
+
+[tool.vercel]
+entrypoint = "api.index:app"
+
+[tool.vercel.scripts]
+build = "npm --prefix frontend ci && npm --prefix frontend run build"
+
+[tool.vercel.fastapi.static]
+cdn = true
+exclude = true

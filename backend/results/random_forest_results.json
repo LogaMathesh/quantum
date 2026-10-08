@@ -1,0 +1,49 @@
+{
+  "model": "Random Forest",
+  "type": "Classical",
+  "dataset": {
+    "name": "Crop Yiled with Soil and Weather.csv",
+    "rows": 2596,
+    "features": [
+      "Fertilizer",
+      "temp",
+      "N",
+      "P",
+      "K"
+    ],
+    "target": "yeild"
+  },
+  "methodology": {
+    "train_test_split": {
+      "test_size": 0.2,
+      "random_state": 42,
+      "full_test_samples": 520
+    },
+    "preprocessing": "StandardScaler fitted on the training split and applied to the test split.",
+    "estimator": "sklearn.ensemble.RandomForestRegressor(n_estimators=100, random_state=42)"
+  },
+  "metrics": {
+    "r2": 0.990757,
+    "mae": 0.122881,
+    "mse": 0.034737,
+    "rmse": 0.186379,
+    "mape_percent": 1.530272
+  },
+  "comparison_subset": {
+    "test_samples": 150,
+    "selection": "train_test_split of the 520-row test split with train_size=150 and random_state=42",
+    "metrics": {
+      "r2": 0.991049,
+      "mae": 0.113924,
+      "mse": 0.029959,
+      "rmse": 0.173087,
+      "mape_percent": 1.433949
+    }
+  },
+  "metric_source": {
+    "notebook": "../models/with_quantum.ipynb",
+    "full_test": "Classical Random Forest Test Metrics output; independently recalculated from the saved backend estimator and the notebook's dataset/split.",
+    "comparison_subset": "Fair Comparison table output; independently recalculated from the saved backend estimator."
+  },
+  "source_selection_note": "The root-level with_quantum.ipynb contains a separate RF run with slightly different rounded results. This result uses the backend notebook run because its full-test metrics match the saved backend estimator when evaluated against the current dataset and split."
+}

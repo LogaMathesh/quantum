@@ -1,0 +1,29 @@
+{
+  "model": "Linear Regression + Quantum",
+  "inference_artifacts": [
+    "linear_regression.joblib",
+    "qkrr_model.npz",
+    "vqr_parameters.npz",
+    "vqr_circuits.json"
+  ],
+  "contents": {
+    "linear_regression.joblib": "LR estimator, matching StandardScaler, feature_cols and target_col metadata.",
+    "qkrr_model.npz": "LR-specific QKRR alpha, lambda_reg, and 300 scaled LR quantum training inputs.",
+    "vqr_parameters.npz": "LR-specific trained VQR parameters.",
+    "vqr_circuits.json": "Feature-map/ansatz configuration and inference seeds.",
+    "training_validation.json": "Provenance, regenerated VQR metrics, and validation notes; not needed for inference."
+  },
+  "feature_order": [
+    "Fertilizer",
+    "temp",
+    "N",
+    "P",
+    "K"
+  ],
+  "target": "yeild",
+  "legacy_artifact_excluded": "../../../linear_regression_model/qkrr_model/alpha.npy",
+  "training_dependencies": {
+    "dataset": "../../../Crop Yiled with Soil and Weather.csv",
+    "kernel_matrices_used_for_qkrr_training": "../../../linear_regression_model/K_train_q.npy"
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "model": "Random Forest",
+  "inference_artifacts": [
+    "random_forest.joblib"
+  ],
+  "contents": {
+    "random_forest.joblib": "Trained sklearn RandomForestRegressor, fitted StandardScaler, feature_cols metadata, target_col metadata."
+  },
+  "feature_order": [
+    "Fertilizer",
+    "temp",
+    "N",
+    "P",
+    "K"
+  ],
+  "target": "yeild",
+  "sklearn_version_warning": "Serialized estimators were created with scikit-learn 1.7.0. Loading under the current 1.9.1 environment emits InconsistentVersionWarning.",
+  "legacy_quantum_files": "Older QKRR/VQR files in this directory are retained for compatibility but are not used by the canonical RF + Quantum predictor."
+}

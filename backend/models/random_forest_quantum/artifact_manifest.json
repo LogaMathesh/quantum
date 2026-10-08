@@ -1,0 +1,25 @@
+{
+  "model": "Random Forest + Quantum",
+  "inference_artifacts": [
+    "qkrr_model.npz",
+    "vqr_parameters.npz",
+    "vqr_circuits.json",
+    "../random_forest/random_forest.joblib"
+  ],
+  "contents": {
+    "qkrr_model.npz": "RF-specific QKRR alpha, lambda_reg, and 300 scaled RF quantum training inputs.",
+    "vqr_parameters.npz": "RF-specific trained VQR parameters.",
+    "vqr_circuits.json": "RF quantum feature-map/ansatz configuration and inference seeds.",
+    "../random_forest/random_forest.joblib": "RF estimator and its fitted scaler and feature metadata; shared by the classical RF predictor."
+  },
+  "feature_order": [
+    "Fertilizer",
+    "temp",
+    "N",
+    "P",
+    "K"
+  ],
+  "target": "yeild",
+  "training_source": "../with_quantum.ipynb",
+  "legacy_artifacts": "Original RF quantum artifacts remain in ../random_forest/ and ../; canonical standalone inference uses only this directory's copied arrays/config and the sibling RF model."
+}

@@ -1,0 +1,12 @@
+-r backend/requirements.txt
+
+# Match the version used to serialize the Random Forest artifacts.
+scikit-learn==1.7.0
+
+# Keep the quantum runtime aligned with the already-validated artifacts.
+qiskit==2.5.0
+qiskit-machine-learning==0.9.1
+qiskit-algorithms==0.4.0
+
+# Provides FastAPI's app.frontend() integration used by the deployment entrypoint.
+fastapi==0.143.0

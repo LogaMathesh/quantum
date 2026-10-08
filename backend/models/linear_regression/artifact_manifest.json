@@ -1,0 +1,20 @@
+{
+  "model": "Linear Regression",
+  "inference_artifacts": [
+    "linear_regression.joblib"
+  ],
+  "contents": {
+    "linear_regression.joblib": "Trained sklearn LinearRegression, fitted StandardScaler, feature_cols metadata, target_col metadata."
+  },
+  "feature_order": [
+    "Fertilizer",
+    "temp",
+    "N",
+    "P",
+    "K"
+  ],
+  "target": "yeild",
+  "training_dependencies": {
+    "dataset": "../../../Crop Yiled with Soil and Weather.csv"
+  }
+}

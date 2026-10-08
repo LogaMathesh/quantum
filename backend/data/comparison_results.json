@@ -1,0 +1,40 @@
+{
+    "dataset": {
+        "name": "Crop Yield with Soil and Weather Dataset",
+        "samples": 2596,
+        "features": [
+            "Fertilizer",
+            "temp",
+            "N",
+            "P",
+            "K"
+        ],
+        "target": "yeild"
+    },
+    "models": {
+        "linear_regression": {
+            "name": "Linear Regression",
+            "r2": 0.862648,
+            "rmse": 0.718474,
+            "mae": 0.579096
+        },
+        "random_forest": {
+            "name": "Random Forest",
+            "r2": 0,
+            "rmse": 0,
+            "mae": 0
+        },
+        "linear_quantum": {
+            "name": "Linear Regression + Quantum",
+            "r2": 0,
+            "rmse": 0,
+            "mae": 0
+        },
+        "random_forest_quantum": {
+            "name": "Random Forest + Quantum",
+            "r2": 0,
+            "rmse": 0,
+            "mae": 0
+        }
+    }
+}

@@ -1,0 +1,48 @@
+{
+  "model": "Linear Regression",
+  "type": "Classical",
+  "dataset": {
+    "name": "Crop Yiled with Soil and Weather.csv",
+    "rows": 2596,
+    "features": [
+      "Fertilizer",
+      "temp",
+      "N",
+      "P",
+      "K"
+    ],
+    "target": "yeild"
+  },
+  "methodology": {
+    "train_test_split": {
+      "test_size": 0.2,
+      "random_state": 42,
+      "full_test_samples": 520
+    },
+    "preprocessing": "StandardScaler fitted on the training split and applied to the test split.",
+    "estimator": "sklearn.linear_model.LinearRegression"
+  },
+  "metrics": {
+    "r2": 0.862648,
+    "mae": 0.579096,
+    "mse": 0.516205,
+    "rmse": 0.718474,
+    "mape_percent": 6.888511
+  },
+  "comparison_subset": {
+    "test_samples": 150,
+    "selection": "train_test_split of the 520-row test split with train_size=150 and random_state=42",
+    "metrics": {
+      "r2": 0.826835,
+      "mae": 0.625815,
+      "mse": 0.579573,
+      "rmse": 0.761297,
+      "mape_percent": 7.31176
+    }
+  },
+  "metric_source": {
+    "notebook": "../../linear_regression_quantum.ipynb",
+    "full_test": "Classical Linear Regression Test Metrics output; recalculated from the saved estimator and the notebook's dataset/split.",
+    "comparison_subset": "Fair Comparison on 150-Sample Quantum Test Subset output; also recalculated from the saved estimator."
+  }
+}

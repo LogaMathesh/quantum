@@ -1,0 +1,48 @@
+{
+  "model": "Linear Regression + Quantum",
+  "type": "Quantum Integrated",
+  "dataset": {
+    "name": "Crop Yiled with Soil and Weather.csv",
+    "rows": 2596,
+    "features": [
+      "Fertilizer",
+      "temp",
+      "N",
+      "P",
+      "K"
+    ],
+    "target": "yeild"
+  },
+  "methodology": {
+    "train_test_split": {
+      "test_size": 0.2,
+      "random_state": 42,
+      "quantum_train_samples": 300,
+      "quantum_test_samples": 150,
+      "random_state_for_quantum_subsets": 42
+    },
+    "preprocessing": "StandardScaler fitted on the original training split and applied to the test split before selecting the quantum subsets.",
+    "pipeline": [
+      "LinearRegression baseline",
+      "QKRR residual correction using FidelityQuantumKernel and ZZFeatureMap (5 dimensions, reps=2, full entanglement), lambda_reg=0.001",
+      "VQR residual correction using RealAmplitudes (5 qubits, reps=2, full entanglement), SPSA(maxiter=100)"
+    ],
+    "final_prediction": "y_pred_final_q = y_pred_hybrid_q + vqr_correction_q"
+  },
+  "metrics": {
+    "r2": -17.110232,
+    "mae": 6.081554,
+    "mse": 60.613948,
+    "rmse": 7.785496,
+    "mape_percent": 74.142012
+  },
+  "evaluation": {
+    "test_samples": 150,
+    "source": "Executed notebook output for 'LR + QKRR + VQR Test Metrics'."
+  },
+  "metric_source": {
+    "notebook": "../../linear_regression_quantum.ipynb",
+    "prediction_variable": "y_pred_final_q",
+    "note": "Metrics are preserved from the notebook's executed final-hybrid cell. The original fitted LR VQR parameters were not persisted. A fresh VQR fit using the same notebook recipe and global seed produced R2=-17.026844, MAE=6.060537, MSE=60.334853, RMSE=7.767551, MAPE=73.916890%, so the recorded notebook metrics were not reproducible in this rerun. The original metrics have deliberately not been overwritten; see ../models/linear_regression_quantum/training_validation.json."
+  }
+}

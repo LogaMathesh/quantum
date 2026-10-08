@@ -1,0 +1,153 @@
+{
+  "test_input": {
+    "Fertilizer": 120,
+    "temp": 100,
+    "N": 100,
+    "P": 99,
+    "K": 98
+  },
+  "dependencies": {
+    "python": "3.12",
+    "scikit_learn_runtime": "1.9.1",
+    "qiskit": "2.5.0",
+    "qiskit_machine_learning": "0.9.1",
+    "qiskit_algorithms": "0.4.0",
+    "joblib": "1.6.0",
+    "numpy": "2.5.0"
+  },
+  "model_loading": {
+    "strategy": "All four estimator/artifact sets and quantum circuits load once at predictions module import.",
+    "registry_unchanged_during_inference": true,
+    "joblib_load_calls_during_second_prediction_batch": 0
+  },
+  "warnings": [
+    "DeprecationWarning: The class ``qiskit.circuit.library.blueprintcircuit.BlueprintCircuit`` is deprecated as of Qiskit 2.1. It will be removed in Qiskit 3.0. There is no direct replacement other than the QuantumCircuit class.",
+    "DeprecationWarning: The class ``qiskit.circuit.library.data_preparation._zz_feature_map.ZZFeatureMap`` is deprecated as of Qiskit 2.1. It will be removed in Qiskit 3.0. Use the zz_feature_map function as a replacement. Note that this will no longer return a BlueprintCircuit, but just a plain QuantumCircuit.",
+    "DeprecationWarning: The class ``qiskit.circuit.library.data_preparation.pauli_feature_map.PauliFeatureMap`` is deprecated as of Qiskit 2.1. It will be removed in Qiskit 3.0. Use the pauli_feature_map function as a replacement. Note that this will no longer return a BlueprintCircuit, but just a plain QuantumCircuit.",
+    "DeprecationWarning: The class ``qiskit.circuit.library.n_local.n_local.NLocal`` is deprecated as of Qiskit 2.1. It will be removed in Qiskit 3.0. This applies to NLocal subclasses too. Use the corresponding function from the module qiskit.circuit.library.n_local instead.",
+    "DeprecationWarning: The class ``qiskit.circuit.library.n_local.real_amplitudes.RealAmplitudes`` is deprecated as of Qiskit 2.1. It will be removed in Qiskit 3.0. Use the function qiskit.circuit.library.real_amplitudes instead.",
+    "DeprecationWarning: The class ``qiskit.circuit.library.n_local.two_local.TwoLocal`` is deprecated as of Qiskit 2.1. It will be removed in Qiskit 3.0. Use the function qiskit.circuit.library.n_local instead.",
+    "InconsistentVersionWarning: Trying to unpickle estimator DecisionTreeRegressor from version 1.7.0 when using version 1.9.1. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhttps://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations",
+    "InconsistentVersionWarning: Trying to unpickle estimator RandomForestRegressor from version 1.7.0 when using version 1.9.1. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhttps://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations",
+    "InconsistentVersionWarning: Trying to unpickle estimator StandardScaler from version 1.7.0 when using version 1.9.1. This might lead to breaking code or invalid results. Use at your own risk. For more info please refer to:\nhttps://scikit-learn.org/stable/model_persistence.html#security-maintainability-limitations",
+    "Qiskit 2.5.0 emits deprecation warnings for the notebook's ZZFeatureMap and RealAmplitudes circuit classes; the notebook circuit definitions were retained."
+  ],
+  "linear_regression": {
+    "model_name": "Linear Regression",
+    "artifact_paths": [
+      "backend/models/linear_regression/linear_regression.joblib"
+    ],
+    "load_status": "success",
+    "missing_artifacts": [],
+    "prediction_status": "success",
+    "test_input": {
+      "Fertilizer": 120,
+      "temp": 100,
+      "N": 100,
+      "P": 99,
+      "K": 98
+    },
+    "prediction": 38.43927814304098,
+    "warnings": [],
+    "dependencies": {
+      "python": "3.12",
+      "scikit_learn_runtime": "1.9.1",
+      "qiskit": "2.5.0",
+      "qiskit_machine_learning": "0.9.1",
+      "qiskit_algorithms": "0.4.0",
+      "joblib": "1.6.0",
+      "numpy": "2.5.0"
+    }
+  },
+  "linear_regression_quantum": {
+    "model_name": "Linear Regression + Quantum",
+    "artifact_paths": [
+      "backend/models/linear_regression_quantum/linear_regression.joblib",
+      "backend/models/linear_regression_quantum/qkrr_model.npz",
+      "backend/models/linear_regression_quantum/vqr_parameters.npz",
+      "backend/models/linear_regression_quantum/vqr_circuits.json"
+    ],
+    "load_status": "success",
+    "missing_artifacts": [],
+    "prediction_status": "success",
+    "test_input": {
+      "Fertilizer": 120,
+      "temp": 100,
+      "N": 100,
+      "P": 99,
+      "K": 98
+    },
+    "prediction": 39.51385555170348,
+    "warnings": [],
+    "dependencies": {
+      "python": "3.12",
+      "scikit_learn_runtime": "1.9.1",
+      "qiskit": "2.5.0",
+      "qiskit_machine_learning": "0.9.1",
+      "qiskit_algorithms": "0.4.0",
+      "joblib": "1.6.0",
+      "numpy": "2.5.0"
+    }
+  },
+  "random_forest": {
+    "model_name": "Random Forest",
+    "artifact_paths": [
+      "backend/models/random_forest/random_forest.joblib"
+    ],
+    "load_status": "success",
+    "missing_artifacts": [],
+    "prediction_status": "success",
+    "test_input": {
+      "Fertilizer": 120,
+      "temp": 100,
+      "N": 100,
+      "P": 99,
+      "K": 98
+    },
+    "prediction": 8.17278140086737,
+    "warnings": [
+      "The saved RF estimator was trained with scikit-learn 1.7.0 and loaded with runtime 1.9.1; InconsistentVersionWarning was emitted."
+    ],
+    "dependencies": {
+      "python": "3.12",
+      "scikit_learn_runtime": "1.9.1",
+      "qiskit": "2.5.0",
+      "qiskit_machine_learning": "0.9.1",
+      "qiskit_algorithms": "0.4.0",
+      "joblib": "1.6.0",
+      "numpy": "2.5.0"
+    }
+  },
+  "random_forest_quantum": {
+    "model_name": "Random Forest + Quantum",
+    "artifact_paths": [
+      "backend/models/random_forest_quantum/qkrr_model.npz",
+      "backend/models/random_forest_quantum/vqr_parameters.npz",
+      "backend/models/random_forest_quantum/vqr_circuits.json",
+      "backend/models/random_forest/random_forest.joblib"
+    ],
+    "load_status": "success",
+    "missing_artifacts": [],
+    "prediction_status": "success",
+    "test_input": {
+      "Fertilizer": 120,
+      "temp": 100,
+      "N": 100,
+      "P": 99,
+      "K": 98
+    },
+    "prediction": 8.167988918829494,
+    "warnings": [
+      "The saved RF estimator was trained with scikit-learn 1.7.0 and loaded with runtime 1.9.1; InconsistentVersionWarning was emitted."
+    ],
+    "dependencies": {
+      "python": "3.12",
+      "scikit_learn_runtime": "1.9.1",
+      "qiskit": "2.5.0",
+      "qiskit_machine_learning": "0.9.1",
+      "qiskit_algorithms": "0.4.0",
+      "joblib": "1.6.0",
+      "numpy": "2.5.0"
+    }
+  }
+}

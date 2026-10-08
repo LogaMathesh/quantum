@@ -1,8 +1,9 @@
 fastapi
 uvicorn
+pydantic
 numpy
-scikit-learn
 joblib
+scikit-learn
 qiskit
 qiskit-machine-learning
 qiskit-algorithms

@@ -1,0 +1,48 @@
+{
+  "model": "Linear Regression + QKRR + VQR",
+  "training_method": "Existing notebook methodology; used saved LR kernel matrices without recomputing the quantum kernel.",
+  "vqr_fit_seconds": 295.30942649999633,
+  "notebook_metrics": {
+    "r2": -17.110232,
+    "mae": 6.081554,
+    "mse": 60.613948,
+    "rmse": 7.785496,
+    "mape_percent": 74.142012
+  },
+  "regenerated_metrics": {
+    "r2": -17.026843963770233,
+    "mae": 6.060537195329984,
+    "mse": 60.33485260203705,
+    "rmse": 7.767551261629179,
+    "mape_percent": 73.91689002370966
+  },
+  "matches_notebook_to_6_decimal_places": false,
+  "metric_comparison_tolerance": 5e-07,
+  "single_input_prediction_parity": {
+    "comparison": "Freshly fitted notebook VQR.predict versus standalone EstimatorQNN.forward, sharing the same QKRR kernel row.",
+    "standalone_prediction": 36.55545590182591,
+    "notebook_vqr_prediction": 36.55456572107282,
+    "absolute_difference": 0.0008901807530889982,
+    "tolerance": 0.001,
+    "note": "This training-time comparison used the notebook's unseeded StatevectorEstimator; finite-shot outputs can vary between separate inference calls."
+  },
+  "standalone_smoke_test": {
+    "input": {
+      "Fertilizer": 120,
+      "temp": 100,
+      "N": 100,
+      "P": 99,
+      "K": 98
+    },
+    "inference_sampler_seed": 42,
+    "inference_estimator_seed": 42,
+    "linear_regression_quantum_prediction": 39.513855551703,
+    "random_forest_quantum_prediction": 8.167988918829,
+    "standalone_vs_notebook_vqr_path_absolute_difference": 0.0,
+    "notebook_vqr_path": "VQR.neural_network.forward(X, saved_weights), which is the forward pass used by VQR.predict after fitting."
+  },
+  "standalone_inference": {
+    "sampler_seed": 42,
+    "reason": "The notebook used an unseeded finite-shot StatevectorSampler; fixed inference seed makes standalone predictions repeatable."
+  }
+}

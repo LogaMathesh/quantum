@@ -1,0 +1,26 @@
+{
+  "n_qubits": 5,
+  "feature_map_reps": 2,
+  "feature_map_entanglement": "full",
+  "ansatz_reps": 2,
+  "entanglement": "full",
+  "inference_sampler_seed": 42,
+  "inference_estimator_seed": 42,
+  "ansatz_parameter_order": [
+    "\u03b8[0]",
+    "\u03b8[1]",
+    "\u03b8[2]",
+    "\u03b8[3]",
+    "\u03b8[4]",
+    "\u03b8[5]",
+    "\u03b8[6]",
+    "\u03b8[7]",
+    "\u03b8[8]",
+    "\u03b8[9]",
+    "\u03b8[10]",
+    "\u03b8[11]",
+    "\u03b8[12]",
+    "\u03b8[13]",
+    "\u03b8[14]"
+  ]
+}

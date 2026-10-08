@@ -1,0 +1,198 @@
+{
+  "base_url": "http://127.0.0.1:8010",
+  "test_input": {
+    "fertilizer": 120,
+    "temp": 100,
+    "N": 100,
+    "P": 99,
+    "K": 98
+  },
+  "tests": [
+    {
+      "endpoint": "GET /api/health",
+      "http_status": 200,
+      "request": null,
+      "response": {
+        "status": "ok"
+      }
+    },
+    {
+      "endpoint": "GET /api/models",
+      "http_status": 200,
+      "request": null,
+      "response": {
+        "models": [
+          {
+            "id": "linear_regression",
+            "name": "Linear Regression",
+            "type": "classical"
+          },
+          {
+            "id": "linear_regression_quantum",
+            "name": "Linear Regression + Quantum",
+            "type": "quantum_integrated"
+          },
+          {
+            "id": "random_forest",
+            "name": "Random Forest",
+            "type": "classical"
+          },
+          {
+            "id": "random_forest_quantum",
+            "name": "Random Forest + Quantum",
+            "type": "quantum_integrated"
+          }
+        ]
+      }
+    },
+    {
+      "endpoint": "GET /api/results",
+      "http_status": 200,
+      "request": null,
+      "response": {
+        "dataset": {
+          "name": "Crop Yiled with Soil and Weather.csv",
+          "samples": 2596,
+          "features": [
+            "Fertilizer",
+            "temp",
+            "N",
+            "P",
+            "K"
+          ],
+          "target": "yeild"
+        },
+        "evaluation": {
+          "comparison_samples": 150,
+          "method": "Each model was evaluated on the same deterministic 150-row subset of the held-out 20% test split (random_state=42). StandardScaler was fit on the original training split only.",
+          "metric_units": {
+            "mape": "percent"
+          }
+        },
+        "models": [
+          {
+            "name": "Linear Regression",
+            "type": "Classical",
+            "r2": 0.826835,
+            "mae": 0.625815,
+            "mse": 0.579573,
+            "rmse": 0.761297,
+            "mape": 7.31176,
+            "full_test_metrics": {
+              "samples": 520,
+              "r2": 0.862648,
+              "mae": 0.579096,
+              "mse": 0.516205,
+              "rmse": 0.718474,
+              "mape": 6.888511
+            },
+            "source": "linear_regression_results.json"
+          },
+          {
+            "name": "Linear Regression + Quantum",
+            "type": "Quantum Integrated",
+            "r2": -17.110232,
+            "mae": 6.081554,
+            "mse": 60.613948,
+            "rmse": 7.785496,
+            "mape": 74.142012,
+            "source": "linear_regression_quantum_results.json",
+            "prediction_pipeline": "LR + QKRR + VQR"
+          },
+          {
+            "name": "Random Forest",
+            "type": "Classical",
+            "r2": 0.991049,
+            "mae": 0.113924,
+            "mse": 0.029959,
+            "rmse": 0.173087,
+            "mape": 1.433949,
+            "full_test_metrics": {
+              "samples": 520,
+              "r2": 0.990757,
+              "mae": 0.122881,
+              "mse": 0.034737,
+              "rmse": 0.186379,
+              "mape": 1.530272
+            },
+            "source": "random_forest_results.json"
+          },
+          {
+            "name": "Random Forest + Quantum",
+            "type": "Quantum Integrated",
+            "r2": -1.652454,
+            "mae": 2.387545,
+            "mse": 8.877619,
+            "rmse": 2.979533,
+            "mape": 28.517846,
+            "source": "random_forest_quantum_results.json",
+            "prediction_pipeline": "RF + QKRR + VQR"
+          }
+        ],
+        "metric_sources": {
+          "linear_regression": "../../linear_regression_quantum.ipynb",
+          "random_forest": "../models/with_quantum.ipynb"
+        }
+      }
+    },
+    {
+      "endpoint": "POST /api/predict",
+      "http_status": 200,
+      "request": {
+        "fertilizer": 120,
+        "temp": 100,
+        "N": 100,
+        "P": 99,
+        "K": 98
+      },
+      "response": {
+        "input": {
+          "fertilizer": 120.0,
+          "temp": 100.0,
+          "N": 100.0,
+          "P": 99.0,
+          "K": 98.0
+        },
+        "predictions": {
+          "linear_regression": 38.43927814304098,
+          "linear_regression_quantum": 39.51385555170348,
+          "random_forest": 8.17278140086737,
+          "random_forest_quantum": 8.167988918829494
+        }
+      }
+    },
+    {
+      "endpoint": "GET /docs",
+      "http_status": 200,
+      "request": null,
+      "response": {
+        "content_type": "text/html; charset=utf-8",
+        "description": "Swagger UI HTML served"
+      }
+    },
+    {
+      "endpoint": "GET /openapi.json",
+      "http_status": 200,
+      "request": null,
+      "response": {
+        "paths": [
+          "/api/health",
+          "/api/models",
+          "/api/results",
+          "/api/predict"
+        ],
+        "prediction_request_required_fields": [
+          "fertilizer",
+          "temp",
+          "N",
+          "P",
+          "K"
+        ],
+        "prediction_request_fields_are_numeric": true
+      }
+    }
+  ],
+  "warnings": [
+    "Random Forest artifacts were serialized with scikit-learn 1.7.0 and loaded under scikit-learn 1.9.1; the existing InconsistentVersionWarning remains."
+  ]
+}

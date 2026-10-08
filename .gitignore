@@ -11,3 +11,11 @@ pip-selfcheck.json
 
 # If you use pyenv
 .python-version
+
+# Local environment variables; keep the production Vite same-origin setting tracked.
+.env
+.env.*
+frontend/.env
+frontend/.env.*
+!frontend/.env.production
+!.env.example

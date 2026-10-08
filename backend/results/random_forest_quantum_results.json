@@ -1,0 +1,48 @@
+{
+  "model": "Random Forest + Quantum",
+  "type": "Quantum Integrated",
+  "dataset": {
+    "name": "Crop Yiled with Soil and Weather.csv",
+    "rows": 2596,
+    "features": [
+      "Fertilizer",
+      "temp",
+      "N",
+      "P",
+      "K"
+    ],
+    "target": "yeild"
+  },
+  "methodology": {
+    "train_test_split": {
+      "test_size": 0.2,
+      "random_state": 42,
+      "quantum_train_samples": 300,
+      "quantum_test_samples": 150,
+      "random_state_for_quantum_subsets": 42
+    },
+    "preprocessing": "StandardScaler fitted on the original training split and applied to the test split before selecting the quantum subsets.",
+    "pipeline": [
+      "RandomForestRegressor(n_estimators=100, random_state=42) baseline",
+      "QKRR residual correction using FidelityQuantumKernel and ZZFeatureMap (5 dimensions, reps=2, full entanglement), lambda_reg=0.001",
+      "VQR residual correction using RealAmplitudes (5 qubits, reps=2, full entanglement), SPSA(maxiter=100)"
+    ],
+    "final_prediction": "y_pred_final_q = y_pred_hybrid_q + vqr_correction_q"
+  },
+  "metrics": {
+    "r2": -1.652454,
+    "mae": 2.387545,
+    "mse": 8.877619,
+    "rmse": 2.979533,
+    "mape_percent": 28.517846
+  },
+  "evaluation": {
+    "test_samples": 150,
+    "source": "Executed notebook output for 'RF + QKRR + VQR Test Metrics (150-sample subset)'."
+  },
+  "metric_source": {
+    "notebook": "../models/with_quantum.ipynb",
+    "prediction_variable": "y_pred_final_q",
+    "note": "Uses the backend RF notebook's final QKRR+VQR output, not the separate root-level notebook's QKRR-only output."
+  }
+}
