@@ -5,16 +5,16 @@ from __future__ import annotations
 import json
 import math
 from collections.abc import Mapping
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
+from threading import Lock
 from typing import Any
 
 import joblib
 import numpy as np
 from qiskit.circuit.library import RealAmplitudes, ZZFeatureMap
-from qiskit.primitives import StatevectorEstimator, StatevectorSampler
-from qiskit_algorithms.state_fidelities import ComputeUncompute
-from qiskit_machine_learning.kernels import FidelityQuantumKernel
+from qiskit.primitives import StatevectorEstimator
+from qiskit.quantum_info import Statevector
 from qiskit_machine_learning.neural_networks import EstimatorQNN
 from sklearn.preprocessing import StandardScaler
 
@@ -35,12 +35,40 @@ class ClassicalModel:
 @dataclass(frozen=True)
 class QuantumModel:
     classical: ClassicalModel
-    kernel: FidelityQuantumKernel
+    feature_map: ZZFeatureMap
     alpha: np.ndarray
     quantum_training_inputs: np.ndarray
     vqr_qnn: EstimatorQNN
     vqr_parameters: np.ndarray
     artifact_paths: tuple[Path, ...]
+    _training_states: np.ndarray | None = field(
+        default=None, init=False, repr=False, compare=False
+    )
+    _training_states_lock: Lock = field(
+        default_factory=Lock, init=False, repr=False, compare=False
+    )
+
+    @property
+    def quantum_training_states(self) -> np.ndarray:
+        states = self._training_states
+        if states is None:
+            with self._training_states_lock:
+                states = self._training_states
+                if states is None:
+                    parameters = tuple(self.feature_map.parameters)
+                    states = np.stack(
+                        [
+                            Statevector.from_instruction(
+                                self.feature_map.assign_parameters(
+                                    dict(zip(parameters, values)), inplace=False
+                                )
+                            ).data
+                            for values in self.quantum_training_inputs
+                        ]
+                    )
+                    states.setflags(write=False)
+                    object.__setattr__(self, "_training_states", states)
+        return states
 
 
 @dataclass(frozen=True)
@@ -165,14 +193,7 @@ def _load_quantum_model(
             f"saved={len(vqr_parameters)}, expected={ansatz.num_parameters}"
         )
 
-    sampler_seed = int(config.get("inference_sampler_seed", 42))
     estimator_seed = int(config.get("inference_estimator_seed", 42))
-    kernel = FidelityQuantumKernel(
-        feature_map=feature_map,
-        fidelity=ComputeUncompute(
-            sampler=StatevectorSampler(seed=sampler_seed)
-        ),
-    )
     vqr_qnn = EstimatorQNN(
         circuit=feature_map.compose(ansatz),
         estimator=StatevectorEstimator(seed=estimator_seed),
@@ -181,7 +202,7 @@ def _load_quantum_model(
     )
     return QuantumModel(
         classical=classical,
-        kernel=kernel,
+        feature_map=feature_map,
         alpha=alpha,
         quantum_training_inputs=quantum_training_inputs,
         vqr_qnn=vqr_qnn,
@@ -261,13 +282,16 @@ def _predict_quantum(
     baseline = float(
         np.asarray(model.classical.estimator.predict(scaled)).reshape(-1)[0]
     )
-    kernel_values = model.kernel.evaluate(
-        x_vec=scaled,
-        y_vec=model.quantum_training_inputs,
+    parameters = tuple(model.feature_map.parameters)
+    query_state = Statevector.from_instruction(
+        model.feature_map.assign_parameters(
+            dict(zip(parameters, scaled[0])), inplace=False
+        )
     )
-    qkrr_correction = float(
-        np.asarray(kernel_values @ model.alpha).reshape(-1)[0]
-    )
+    kernel_values = np.abs(
+        model.quantum_training_states.conj() @ query_state.data
+    ) ** 2
+    qkrr_correction = float(kernel_values @ model.alpha)
     vqr_correction = float(
         np.asarray(
             model.vqr_qnn.forward(scaled, model.vqr_parameters)

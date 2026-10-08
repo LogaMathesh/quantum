@@ -16,7 +16,7 @@
     "numpy": "2.5.0"
   },
   "model_loading": {
-    "strategy": "All four estimator/artifact sets and quantum circuits load once at predictions module import.",
+    "strategy": "Model artifacts and quantum circuits load once at import; exact training statevectors are built and cached on first inference.",
     "registry_unchanged_during_inference": true,
     "joblib_load_calls_during_second_prediction_batch": 0
   },
@@ -77,7 +77,7 @@
       "P": 99,
       "K": 98
     },
-    "prediction": 39.51385555170348,
+    "prediction": 40.41664996528794,
     "warnings": [],
     "dependencies": {
       "python": "3.12",
@@ -136,7 +136,7 @@
       "P": 99,
       "K": 98
     },
-    "prediction": 8.167988918829494,
+    "prediction": 7.715675268441199,
     "warnings": [
       "The saved RF estimator was trained with scikit-learn 1.7.0 and loaded with runtime 1.9.1; InconsistentVersionWarning was emitted."
     ],

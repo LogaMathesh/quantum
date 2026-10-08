@@ -113,7 +113,7 @@ def main() -> None:
         "test_input": TEST_INPUT,
         "dependencies": _dependencies(),
         "model_loading": {
-            "strategy": "All four estimator/artifact sets and quantum circuits load once at predictions module import.",
+            "strategy": "Model artifacts and quantum circuits load once at import; exact training statevectors are built and cached on first inference.",
             "registry_unchanged_during_inference": True,
             "joblib_load_calls_during_second_prediction_batch": len(load_calls),
         },

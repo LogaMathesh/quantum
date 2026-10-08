@@ -40,11 +40,11 @@
     {
       "name": "Linear Regression + Quantum",
       "type": "Quantum Integrated",
-      "r2": -17.110232,
-      "mae": 6.081554,
-      "mse": 60.613948,
-      "rmse": 7.785496,
-      "mape": 74.142012,
+      "r2": -8.747512,
+      "mae": 4.355803,
+      "mse": 32.624384,
+      "rmse": 5.711776,
+      "mape": 53.417599,
       "source": "linear_regression_quantum_results.json",
       "prediction_pipeline": "LR + QKRR + VQR"
     },
@@ -69,11 +69,11 @@
     {
       "name": "Random Forest + Quantum",
       "type": "Quantum Integrated",
-      "r2": -1.652454,
-      "mae": 2.387545,
-      "mse": 8.877619,
-      "rmse": 2.979533,
-      "mape": 28.517846,
+      "r2": -0.006265,
+      "mae": 1.468518,
+      "mse": 3.367914,
+      "rmse": 1.835188,
+      "mape": 17.426192,
       "source": "random_forest_quantum_results.json",
       "prediction_pipeline": "RF + QKRR + VQR"
     }
